@@ -1,55 +1,82 @@
-# Modelagem
-
-## Diagrama de classes
-
-Substitua o exemplo abaixo (tema 01, Feira Digital do Sertão) pelo diagrama do seu sistema.
-Legenda: `<|--` herança ("é um"), `*--` composição ("tem um"), `#` protected, `-` private, `+` public.
+# Modelagem: Oficina MotorPrime
 
 ```mermaid
 classDiagram
-    Produto <|-- ProdutoUnitario
-    Produto <|-- ProdutoPorPeso
-    Pedido "1" *-- "*" ItemPedido
-    ItemPedido --> Produto
+    Servico <|-- Revisao
+    Servico <|-- TrocaOleo
+    Servico <|-- Funilaria
+    OrdemServico "1" *-- "*" Servico
+    OrdemServico "1" *-- "1" Cliente
+    OrdemServico "1" *-- "1" Veiculo
+    RepositorioOrdens ..> OrdemServico
 
-    class Produto {
-        #string nome
-        #float preco
-        +__construct(string nome, float preco)
-        +getNome() string
-        +calcularPreco(float quantidade) float
+    class Servico {
+        #string descricao
+        #float horas
+        #float valorHora
+        +getTipo() string
+        +getNomeTipo() string
+        +calcularValor() float
+        +descricaoDetalhada() string
         +paraArray() array
     }
-    class ProdutoUnitario {
-        +calcularPreco(float quantidade) float
+    class Revisao {
+        -int kmAtual
+        -string tipoRevisao
+        +calcularValor() float
+        +descricaoDetalhada() string
     }
-    class ProdutoPorPeso {
-        -float pesoMinimo
-        +calcularPreco(float quantidade) float
+    class TrocaOleo {
+        -float litros
+        -string tipoOleo
+        +calcularValor() float
+        +descricaoDetalhada() string
     }
-    class ItemPedido {
-        -Produto produto
-        -float quantidade
+    class Funilaria {
+        -int paineis
+        -bool pintura
+        +calcularValor() float
+        +descricaoDetalhada() string
+    }
+    class OrdemServico {
+        -int id
+        -Cliente cliente
+        -Veiculo veiculo
+        -array servicos
+        -string status
+        +adicionarServico(Servico servico) void
         +calcularSubtotal() float
-    }
-    class Pedido {
-        -string cliente
-        -array itens
-        +adicionarItem(ItemPedido item) void
+        +calcularDesconto() float
         +calcularTotal() float
+        +alterarStatus(string novo) void
+        +paraArray() array
+    }
+    class Cliente {
+        -string nome
+        -string telefone
+        +paraArray() array
+    }
+    class Veiculo {
+        -string placa
+        -string marca
+        -string modelo
+        -int ano
+        -int quilometragem
+        +paraArray() array
+    }
+    class RepositorioOrdens {
+        -string arquivo
+        +todas() array
+        +buscar(int id) OrdemServico
+        +salvar(OrdemServico ordem) void
     }
 ```
 
 ## Justificativas
 
-### Herança
-
-_(Qual é a classe mãe, quais são as filhas e por que a frase "X é um Y" vale para cada uma. Qual método é sobrescrito e por quê.)_
-
-### Composição
-
-_(Qual classe guarda uma lista de objetos de outra e por que a relação é "tem um", e não "é um".)_
-
-### Encapsulamento
-
-_(Quais atributos têm getter, quais têm setter e por que alguns não têm setter.)_
+- **Herança (Servico → Revisao, TrocaOleo, Funilaria):** os três são serviços (relação "é um"),
+  compartilham descrição, horas e valor da hora, mas cada um calcula o valor de um jeito
+  (taxa de checklist, litros de óleo mais filtro, material e pintura por painel).
+- **Composição (OrdemServico tem Servico, Cliente e Veiculo):** os serviços só existem dentro da
+  ordem ("tem um"). A ordem calcula subtotal, desconto e total percorrendo a lista.
+- **Repositório:** isola a gravação em JSON, para que as classes de domínio não saibam nada de arquivos.
