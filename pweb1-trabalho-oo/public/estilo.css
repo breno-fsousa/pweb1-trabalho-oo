@@ -1,1 +1,209 @@
-/* Visual do sistema */
+/* Oficina Mecânica: quadro de ordens de serviço */
+
+:root {
+    --fundo: #eef1f3;
+    --superficie: #ffffff;
+    --texto: #16232b;
+    --texto-suave: #52636d;
+    --linha: #cdd6db;
+    --asfalto: #1b2a33;
+    --petroleo: #0e5a6b;
+    --petroleo-escuro: #0a4250;
+    --ok: #1d6b45;
+    --ok-fundo: #dff1e7;
+    --erro: #a4261c;
+    --erro-fundo: #fbe3e0;
+    --aberta: #8a5a00;
+    --em-andamento: #0e5a6b;
+    --finalizada: #1d6b45;
+    --cancelada: #6b6f73;
+    --fonte-titulo: "Bahnschrift", "Segoe UI Semibold", "Arial Narrow", system-ui, sans-serif;
+    --fonte-texto: "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --fundo: #11191e;
+        --superficie: #1a252c;
+        --texto: #e6edf0;
+        --texto-suave: #9fb0b8;
+        --linha: #32434d;
+        --asfalto: #0b1115;
+        --petroleo: #4fb3c8;
+        --petroleo-escuro: #7fcfe0;
+        --ok: #6fcf9a;
+        --ok-fundo: #173526;
+        --erro: #ff9b90;
+        --erro-fundo: #3d1a17;
+        --aberta: #f0b840;
+        --em-andamento: #4fb3c8;
+        --finalizada: #6fcf9a;
+        --cancelada: #a3a9ad;
+    }
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+
+body {
+    margin: 0;
+    background: var(--fundo);
+    color: var(--texto);
+    font-family: var(--fonte-texto);
+    line-height: 1.5;
+}
+
+a { color: var(--petroleo); }
+a:hover { color: var(--petroleo-escuro); }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible {
+    outline: 3px solid var(--petroleo);
+    outline-offset: 2px;
+}
+
+/* Cabeçalho e menu (o mesmo em todas as páginas) */
+.topo {
+    background: var(--asfalto);
+    color: #f2f6f8;
+    border-bottom: 4px solid #e0a526;
+}
+.topo-conteudo {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0.75rem 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem 1.5rem;
+}
+.marca {
+    font-family: var(--fonte-titulo);
+    font-size: 1.35rem;
+    color: #f2f6f8;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+}
+.menu { display: flex; flex-wrap: wrap; gap: 0.25rem; }
+.menu a {
+    color: #d3dde2;
+    text-decoration: none;
+    padding: 0.4rem 0.85rem;
+    border-radius: 4px;
+}
+.menu a:hover { background: rgba(255, 255, 255, 0.1); }
+.menu a[aria-current="page"] { background: #f2f6f8; color: #1b2a33; font-weight: 600; }
+
+/* Conteúdo */
+.conteudo { max-width: 1120px; margin: 0 auto; padding: 1.5rem 1rem 3rem; }
+h1 { font-family: var(--fonte-titulo); font-size: 1.9rem; font-weight: 600; margin: 0 0 0.75rem; }
+h2 { font-family: var(--fonte-titulo); font-size: 1.15rem; font-weight: 600; margin: 0 0 0.6rem; }
+.resumo { color: var(--texto-suave); margin: 0 0 1.25rem; }
+.resumo strong { color: var(--texto); }
+.vazio { color: var(--texto-suave); font-style: italic; }
+
+/* Avisos */
+.aviso { padding: 0.7rem 1rem; border-radius: 6px; border-left: 5px solid; margin: 0 0 1.25rem; font-weight: 500; }
+.aviso-ok { background: var(--ok-fundo); border-color: var(--ok); color: var(--ok); }
+.aviso-erro { background: var(--erro-fundo); border-color: var(--erro); color: var(--erro); }
+
+/* A placa: o elemento que identifica cada veículo */
+.placa {
+    display: inline-block;
+    font-family: "Consolas", "Courier New", monospace;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    padding: 0.05rem 0.55rem;
+    border: 2px solid #1b2a33;
+    border-top-width: 6px;
+    border-top-color: #1f4aa8;
+    border-radius: 4px;
+    background: #f7f7f2;
+    color: #1b2a33;
+}
+
+/* Quadro de ordens por status */
+.quadro { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; align-items: start; }
+.coluna {
+    background: var(--superficie);
+    border: 1px solid var(--linha);
+    border-top: 5px solid var(--linha);
+    border-radius: 6px;
+    padding: 0.8rem;
+    min-height: 8rem;
+}
+.coluna-aberta { border-top-color: var(--aberta); }
+.coluna-em_andamento { border-top-color: var(--em-andamento); }
+.coluna-finalizada { border-top-color: var(--finalizada); }
+.coluna-cancelada { border-top-color: var(--cancelada); }
+.contador { font-family: var(--fonte-texto); font-size: 0.85rem; color: var(--texto-suave); margin-left: 0.3rem; }
+.ficha {
+    display: block;
+    text-decoration: none;
+    color: var(--texto);
+    background: var(--fundo);
+    border: 1px solid var(--linha);
+    border-radius: 6px;
+    padding: 0.6rem 0.7rem;
+    margin-bottom: 0.6rem;
+}
+.ficha:hover { border-color: var(--petroleo); }
+.ficha-linha { display: block; font-size: 0.9rem; margin-top: 0.2rem; }
+.ficha-total { color: var(--texto-suave); }
+
+/* Selo de status (texto + cor, nunca só cor) */
+.selo { display: inline-block; padding: 0.1rem 0.6rem; border-radius: 999px; font-size: 0.85rem; font-weight: 600; border: 1.5px solid currentColor; }
+.selo-aberta { color: var(--aberta); }
+.selo-em_andamento { color: var(--em-andamento); }
+.selo-finalizada { color: var(--finalizada); }
+.selo-cancelada { color: var(--cancelada); }
+
+/* Blocos e tabelas */
+.bloco { background: var(--superficie); border: 1px solid var(--linha); border-radius: 6px; padding: 1rem 1.1rem; margin-bottom: 1rem; }
+.bloco p { margin: 0; }
+.duas-colunas { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.rolagem { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; background: var(--superficie); }
+th, td { text-align: left; padding: 0.55rem 0.7rem; border-bottom: 1px solid var(--linha); vertical-align: top; }
+thead th { font-family: var(--fonte-titulo); font-weight: 600; border-bottom: 2px solid var(--texto); }
+tfoot th { font-weight: 500; text-align: right; color: var(--texto-suave); }
+.num { text-align: right; white-space: nowrap; }
+tr.total th, tr.total td { font-weight: 700; font-size: 1.1rem; color: var(--texto); border-bottom: 0; }
+
+/* Formulários */
+form { margin: 0; }
+fieldset { border: 1px solid var(--linha); border-radius: 6px; background: var(--superficie); padding: 0.9rem 1rem 1rem; margin: 0 0 1rem; }
+legend { font-family: var(--fonte-titulo); font-weight: 600; padding: 0 0.4rem; }
+.grade { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 0.8rem 1rem; margin-bottom: 0.8rem; }
+.campo { display: flex; flex-direction: column; gap: 0.25rem; }
+.campo-check { flex-direction: row; align-items: center; gap: 0.5rem; }
+label { font-size: 0.9rem; font-weight: 500; }
+input[type="text"], input[type="number"], select {
+    font: inherit;
+    padding: 0.5rem 0.6rem;
+    border: 1.5px solid var(--linha);
+    border-radius: 4px;
+    background: var(--superficie);
+    color: var(--texto);
+}
+input[type="checkbox"] { width: 1.15rem; height: 1.15rem; }
+.linha-form { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem; }
+button {
+    font: inherit;
+    font-weight: 600;
+    background: var(--petroleo);
+    color: #ffffff;
+    border: 0;
+    border-radius: 4px;
+    padding: 0.6rem 1.2rem;
+    cursor: pointer;
+}
+@media (prefers-color-scheme: dark) { button { color: #0b1115; } }
+button:hover { background: var(--petroleo-escuro); }
+
+.rodape { max-width: 1120px; margin: 0 auto; padding: 1rem; color: var(--texto-suave); font-size: 0.85rem; border-top: 1px solid var(--linha); }
+
+@media (max-width: 960px) { .quadro { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) {
+    .quadro, .duas-colunas { grid-template-columns: 1fr; }
+    h1 { font-size: 1.5rem; }
+}
