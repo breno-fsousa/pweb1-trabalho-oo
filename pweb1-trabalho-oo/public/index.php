@@ -172,7 +172,7 @@ if (!in_array($pagina, $paginasValidas, true)) {
     $pagina = '404';
 }
 
-// A rota JSON é somente leitura.
+// A rota JSON é somente leitura!
 if ($formato === 'json' && $metodo !== 'GET') {
     header('Allow: GET');
     responderJson(['erro' => 'A rota JSON aceita apenas o método GET.'], 405);
