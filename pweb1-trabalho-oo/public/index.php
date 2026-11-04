@@ -277,7 +277,7 @@ header('Content-Type: text/html; charset=utf-8');
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><?= e($tituloPagina) ?> | Oficina Mecânica</title>
+    <title><?= e($tituloPagina) ?> | MotorPrime</title>
     <link rel="stylesheet" href="estilo.css">
 </head>
 <body>
