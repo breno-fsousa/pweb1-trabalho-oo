@@ -283,7 +283,7 @@ header('Content-Type: text/html; charset=utf-8');
 <body>
     <header class="topo">
         <div class="topo-conteudo">
-            <a class="marca" href="index.php?pagina=inicio">Oficina Mecânica</a>
+            <a class="marca" href="index.php?pagina=inicio">MotorPrime</a>
             <nav class="menu" aria-label="Menu principal">
                 <?php foreach ($menu as $chave => $rotulo): ?>
                     <a href="index.php?pagina=<?= e($chave) ?>"<?= $chave === $pagina ? ' aria-current="page"' : '' ?>><?= e($rotulo) ?></a>
