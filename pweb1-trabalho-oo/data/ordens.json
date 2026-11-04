@@ -1,0 +1,107 @@
+{
+    "ordens": [
+        {
+            "id": 1,
+            "data_abertura": "03/11/2026 00:00",
+            "status": "finalizada",
+            "status_rotulo": "Finalizada",
+            "cliente": {
+                "nome": "breno",
+                "telefone": "55555555555"
+            },
+            "veiculo": {
+                "placa": "ABC1D23",
+                "marca": "byd",
+                "modelo": "song pro",
+                "ano": 2026,
+                "quilometragem": 5000
+            },
+            "servicos": [
+                {
+                    "tipo": "revisao",
+                    "nome_tipo": "Revisão",
+                    "descricao": "limpar",
+                    "detalhes": "Revisão completa aos 5.000 km: limpar. Próxima revisão em 15.000 km.",
+                    "horas": 4,
+                    "valor_hora": 90,
+                    "valor": 580,
+                    "km_atual": 5000,
+                    "tipo_revisao": "completa",
+                    "proxima_revisao_km": 15000
+                }
+            ],
+            "horas": 4,
+            "subtotal": 580,
+            "desconto": 0,
+            "total": 580
+        },
+        {
+            "id": 2,
+            "data_abertura": "03/11/2026 00:04",
+            "status": "finalizada",
+            "status_rotulo": "Finalizada",
+            "cliente": {
+                "nome": "Breno F",
+                "telefone": "88921649053"
+            },
+            "veiculo": {
+                "placa": "ABC1D23",
+                "marca": "Toyota",
+                "modelo": "Hilux",
+                "ano": 2025,
+                "quilometragem": 15000
+            },
+            "servicos": [
+                {
+                    "tipo": "troca_oleo",
+                    "nome_tipo": "Troca de óleo",
+                    "descricao": "usar oleo semissintético",
+                    "detalhes": "Troca de óleo semissintetico (5,0 L) com filtro: usar oleo semissintético.",
+                    "horas": 2,
+                    "valor_hora": 90,
+                    "valor": 425,
+                    "litros": 5,
+                    "tipo_oleo": "semissintetico"
+                }
+            ],
+            "horas": 2,
+            "subtotal": 425,
+            "desconto": 0,
+            "total": 425
+        },
+        {
+            "id": 3,
+            "data_abertura": "03/11/2026 14:11",
+            "status": "finalizada",
+            "status_rotulo": "Finalizada",
+            "cliente": {
+                "nome": "Lukinha Pressão",
+                "telefone": "88981530844"
+            },
+            "veiculo": {
+                "placa": "ABC1H45",
+                "marca": "Chevrolet",
+                "modelo": "Celta",
+                "ano": 2014,
+                "quilometragem": 51000
+            },
+            "servicos": [
+                {
+                    "tipo": "troca_oleo",
+                    "nome_tipo": "Troca de óleo",
+                    "descricao": "limpar",
+                    "detalhes": "Troca de óleo sintetico (5,0 L) com filtro: limpar.",
+                    "horas": 2,
+                    "valor_hora": 90,
+                    "valor": 540,
+                    "litros": 5,
+                    "tipo_oleo": "sintetico"
+                }
+            ],
+            "horas": 2,
+            "subtotal": 540,
+            "desconto": 0,
+            "total": 540
+        }
+    ]
+}
